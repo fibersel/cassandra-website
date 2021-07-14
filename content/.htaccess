@@ -3,11 +3,11 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 
-RedirectMatch 301 "/$" "/_/index.html"
+RedirectMatch 301 "^/$" "/_/index.html"
 
 RewriteCond %{REQUEST_URI} !^/doc/.*
 RewriteCond %{REQUEST_URI} ^(.*)/$
-RewriteRule ^(.*)/$ /_$1.html [R=301,L]
+RewriteRule ^(.*)/$ /_/$1.html [R=301,L]
 
 
 <IfModule mod_rewrite.c>
