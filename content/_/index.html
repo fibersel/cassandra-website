@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Apache Cassandra | Apache Cassandra Documentation</title>
+    <link rel="canonical" href="https://cassandra.apache.org/_/index.html">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&amp;family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/site.css">
+    <meta name="description" content="Open Source NoSQL Database Manage massive amounts of data, fast, without losing sleep">
+    <meta name="keywords" content="Home, apache cassandra">
+    <link rel="schema.dcterms" href="https://purl.org/dc/terms/">
+    <meta name="dcterms.subject" content="_">
+    <meta name="dcterms.identifier" content="master">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+<script>
+  const script = document.createElement("script");
+  const domain = window.location.hostname;
+  script.type = "text/javascript";
+  script.src = "https://plausible.cassandra.apache.org/js/plausible.js";
+  script.setAttribute("data-domain",domain);
+  script.setAttribute("defer",'true');
+  script.setAttribute("async",'true');
+  document.getElementsByTagName("head")[0].appendChild(script);
+</script>  </head>
+  <body class="homepage  home">
+      <div class="container mx-auto relative">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta property="og:type" content="website" />
+	<meta property="og:description" content="" />
+	<meta property="og:url" content="https://cassandra.apache.org" />
+	<meta property="og:site_name" content="Apache Cassandra" />
+
+<header id="top-nav">
+    <div class="inner relative">
+        <div class="logo"><a href="https://cassandra.apache.org"><img src="../assets/img/logo-white.svg" alt=""></a></div>
+        <div class="mobile-nav-icon right">
+            <img class="toggle-icon" src="../assets/img/hamburger-nav.svg">
+        </div>
+        <ul class="main-nav nav-links right flex flex-vert-center flex-space-between">
+    <li>
+        <a class="nav-link hide-mobile">Get Started</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/cassandra-basics.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-basics.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Cassandra Basics
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/quickstart.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-rocket.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Quickstart
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/ecosystem.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-ecosystem.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Ecosystem
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="nav-link" href="https://cassandra.apache.org/doc/latest/">Documentation</a></li>
+    <li>
+        <a class="nav-link" href="https://cassandra.apache.org/_/community.html">Community</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/community.html#code-of-conduct">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-welcome.png" alt="welcome icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Welcome
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#discussion">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-discussions.png" alt="discussions icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Discussions
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#project-governance">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-governance.png" alt="Governance icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Governance
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#how-to-contribute">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-contribute.png" alt="Contribute icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Contribute
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#meet-the-community">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-community.png" alt="Meet the Community icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Meet the Community
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a class="nav-link hide-mobile">Learn</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/case-studies.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-case-study.png" alt="Case Studies icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Case Studies
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/resources.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-resources.png" alt="Resources icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Resources
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/blog.html">
+                    <div class="sub-nav-icon">
+                        <img src="../assets/img/sub-menu-blog.png" alt="Blog icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Blog
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="nav-link btn btn--filled" href="https://cassandra.apache.org/_/download.html">Download Now</a></li>
+</ul>
+    </div>
+</header>
+
+        <div class="main-content">
+            <div class="openblock hero hero--home grad">
+<div class="content">
+<div class="openblock eye">
+<div class="content">
+
+</div>
+</div>
+<div class="openblock home-hero-content text-center flex flex-center flex-column relative z2 pa-xlarge">
+<div class="content">
+<h1 class="discrete">Open Source NoSQL Database</h1>
+<h2 class="discrete">Manage massive amounts of data, fast, without losing sleep</h2>
+<div class="paragraph btn btn--filled">
+<p><a href="cassandra-basics.html" class="page">Learn More</a></p>
+</div>
+<div class="paragraph btn btn--filled">
+<p><a href="quickstart.html" class="page">Learn More</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock arrow">
+<div class="content">
+<div class="openblock home-banner w75 product-highlight mx-auto pt-xlarge cf">
+<div class="content">
+<div class="openblock float50 full-800">
+<div class="content">
+<div class="paragraph">
+<p>The most stable Apache Cassandra in history is here! Download the 4.0 Beta.</p>
+</div>
+</div>
+</div>
+<div class="openblock float50 full-800">
+<div class="content">
+<div class="paragraph btn btn--grad ml-large">
+<p><a href="https://www.youtube.com/playlist?list=PLqcm6qE9lgKLi4TD3azt3soaCjfXte32m" target="_blank" rel="noopener">Watch Now</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock home-features grad grad--two flex-center relative">
+<div class="content">
+<div class="openblock inner text-center py-xxlarge">
+<div class="content">
+<h2 class="discrete">What is Apache Cassandra</h2>
+<h3 class="discrete">The Apache Cassandra database is the right choice when you need scalability and high availability without compromising performance.</h3>
+<div class="openblock features-wrapper cf">
+<div class="content">
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/hybrid.png" alt="hybrid"></span></p>
+</div>
+<h3 class="discrete">Hybrid</h3>
+<div class="paragraph">
+<p>Masterless architecture and low latency means Cassandra will withstand an entire data center outage with no data loss—across public or private clouds and on-premises.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/fault.png" alt="fault"></span></p>
+</div>
+<h3 class="discrete">Fault Tolerant</h3>
+<div class="paragraph">
+<p>Cassandra&#8217;s support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages. Failed nodes can be replaced with no downtime.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/scalable.png" alt="scalable"></span></p>
+</div>
+<h3 class="discrete">Focus on Quality</h3>
+<div class="paragraph">
+<p>To ensure reliability and stability, Cassandra is tested on clusters as large as 1,000 nodes and with hundreds of real world use cases and schemas tested with replay, fuzz, property-based, fault-injection, and performance tests.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/performant.png" alt="performant"></span></p>
+</div>
+<h3 class="discrete">Performant</h3>
+<div class="paragraph">
+<p>Cassandra consistently outperforms popular NoSQL alternatives in benchmarks and real applications, primarily because of fundamental architectural choices.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/control.png" alt="control"></span></p>
+</div>
+<h3 class="discrete">You&#8217;re In Control</h3>
+<div class="paragraph">
+<p>Choose between synchronous or asynchronous replication for each update. Highly available asynchronous operations are optimized with features like Hinted Handoff and Read Repair.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/cloud_native.png" alt="cloud native"></span></p>
+</div>
+<h3 class="discrete">Security and Observability</h3>
+<div class="paragraph">
+<p>The audit logging feature for operators tracks the DML, DDL, and DCL activity with minimal impact to normal workload performance, while the fqltool allows the capture and replay of production workloads for analysis.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/scalable.png" alt="scalable"></span></p>
+</div>
+<h3 class="discrete">Distributed</h3>
+<div class="paragraph">
+<p>Cassandra is suitable for applications that can&#8217;t afford to lose data, even when an entire data center goes down. There are no single points of failure. There are no network bottlenecks. Every node in the cluster is identical.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/scalable.png" alt="scalable"></span></p>
+</div>
+<h3 class="discrete">Scalable</h3>
+<div class="paragraph">
+<p>Read and write throughput both increase linearly as new machines are added, with no downtime or interruption to applications.</p>
+</div>
+</div>
+</div>
+<div class="openblock feature text-center ma-small my-large pa-small">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="_images/Icons/elastic.png" alt="elastic"></span></p>
+</div>
+<h3 class="discrete">Elastic</h3>
+<div class="paragraph">
+<p>Cassandra streams data between nodes during scaling operations such as adding a new node or datacenter during peak traffic times. Zero Copy Streaming makes this up to 5x faster without vnodes for a more elastic architecture particularly in cloud and Kubernetes environments.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock users-section arrow">
+<div class="content">
+<div class="openblock inner text-center py-xxlarge z2">
+<div class="content">
+<h2 class="discrete">Cassandra Users</h2>
+<div class="paragraph">
+<p>Cassandra is used by thousands of companies with large active data sets.</p>
+</div>
+<div class="openblock all-users">
+<div class="content">
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/ably_full_logo.png" alt="ably logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/activision_black_text.png" alt="activision logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/adstage_full_white_text.jpg" alt="adstage logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/bazaar_full.png" alt="bazaar logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/best_buy.png" alt="best buy logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/bigmate.png" alt="bigmate logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/blackberry_black_text.jpg" alt="blackberry logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/blackrock_logo.png" alt="blacktread logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/bloomberg.png" alt="bloomberg logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/campaign-monitor_black_text.png" alt="campaign monitor logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/cern_blue_text.png" alt="CERN logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/clearcapital_full.png" alt="Clear Capital logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/cloudkick.png" alt="cloudkick logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/cloudtrax_logo.png" alt="cloudtrax logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/comcast_logo.png" alt="comcast logo logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/constant_contact_white_text.png" alt="constant contact logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/coursera_blue_text.png" alt="coursera blue logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/datacloud.png" alt="datacloud logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/discord_full.png" alt="discord logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/ebay_logo.png" alt="ebay logo logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/equinix.png" alt="equinix logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/flant.png" alt="flant logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/grubhub_red_text.jpg" alt="grubub logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/home_depot.jpg" alt="home depot logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/hulu_white_background.png" alt="hulu white logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/ibm_black_text.svg" alt="ibm black logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/instaclustr.png" alt="instaclustr logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/instagram.jpg" alt="instagram logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/instana_full.png" alt="instana logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/intuit_turbotax_full.png" alt="intuit turbotax logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/keen.png" alt="keen logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/locstat_full.png" alt="loctstat logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/macquarie_bank_black_text.jpg" alt="macquaria bank logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/macys_black_text.png" alt="macys logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/maths_pathway_full.jpg" alt="maths logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/metro_nom.png" alt="metro nom logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/mobile_pay.png" alt="mobile page logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/monzo_full.png" alt="monza logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/netflix.png" alt="netflix logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/new_york_times.png" alt="new york times logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/nhn_techorus.png" alt="nhm techorus logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/ooyala_vertical.png" alt="ooyala logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/outbrain_full.png" alt="outbrain logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/paidy.png" alt="paidly logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/penn_mutual.jpg" alt="penn_mutual logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/protectwise.png" alt="protectwise logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/revrtrax.png" alt="revrtrax logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/sky_logo.png" alt="sky_logo logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/spotify_full.png" alt="spotify logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/target_full.png" alt="target logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/uber_black_text.jpg" alt="uber black logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/urban_airship.jpg" alt="urban airship logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/walmart.png" alt="wallmark logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/woods_hole_oceanographic.png" alt="woods hole oceanographic institue logo">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock grayscale company-logo inline25 inline-middle">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/yelp.jpg" alt="yelp logo">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph btn btn--grad ml-large">
+<p><a href="case-studies.html" class="page">Read Case Studies</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock home-case-study quote grad flex flex-center py-large">
+<div class="content">
+<div class="openblock inner product-highlight flex flex-distibute-items flex-vert-center z2">
+<div class="content">
+<div class="openblock col-2 full-800 text-right pa-large">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/companies/BBGEngineering_white.png" alt="BBGEngineering white">
+</div>
+</div>
+</div>
+</div>
+<div class="openblock col-2 full-800 pa-large flex flex-horz-center flex-column">
+<div class="content">
+<div class="paragraph">
+<p>As part of CASSANDRA-15013, we have improved Cassandra’s ability to handle high throughput workloads, while having enough safeguards in place to protect itself from potentially going out of memory. In order to better explain the change we have made, let us understand at a high level, on how an incoming request is processed by Cassandra before the fix, followed by what we changed, and the new relevant configuration knobs available.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock home-community arrow flex flex-center">
+<div class="content">
+<div class="openblock inner text-center py-large">
+<div class="content">
+<h2 class="discrete">Community spotlight</h2>
+<div class="paragraph w50 mx-auto">
+<p>Here&#8217;s what the Cassandra community has been doing to advance the world&#8217;s premier open source NoSQL database.</p>
+</div>
+<div class="openblock cf text-left ma-large pa-large">
+<div class="content">
+<div class="openblock float50 full-800">
+<div class="content">
+<h3 class="discrete">Improving Apache Cassandra&#8217;s Front Door and Backpressure</h3>
+<div class="paragraph">
+<p>As part of CASSANDRA-15013, we have improved Cassandra’s ability to handle high throughput workloads, while having enough safeguards in place to protect itself from potentially going out of memory. In order to better explain the change we have made, let us understand at a high level, on how an incoming request is processed by Cassandra before the fix, followed by what we changed, and the new relevant configuration knobs available.</p>
+</div>
+<div class="paragraph btn btn--alt my-small">
+<p><a href="#blog/improving-resiliency.adoc" class="page unresolved">Read More</a></p>
+</div>
+</div>
+</div>
+<div class="openblock float50 full-800 flex flex-center pa-medium"">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/blog/blog-post-improving-resiliency/image1.png" alt="image1">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock cf text-left ma-large pa-large">
+<div class="content">
+<div class="openblock float50 full-800 right">
+<div class="content">
+<h3 class="discrete">Cassandra Changelog Blog #6</h3>
+<div class="paragraph">
+<p>The Cassandra Changelog blog is our monthly roundup of key activities and knowledge to keep the community informed. This month includes an update on the 4.0 rc-1 release, welcoming a new committer, the Cassandra World Party, Google Summer of Code (GSoC), and more.</p>
+</div>
+<div class="paragraph btn btn--alt my-small">
+<p><a href="blog/Apache-Cassandra-Changelog-6-April-2021.html" class="page">Read More</a></p>
+</div>
+</div>
+</div>
+<div class="openblock float50 full-800 flex flex-center right pa-medium"">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/blog/blog-post-improving-resiliency/changelog_rectangle.jpg" alt="changelog rectangle">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock cf text-left ma-large pa-large">
+<div class="content">
+<div class="openblock float50 full-800">
+<div class="content">
+<h3 class="discrete">Cassandra Kubernetes SIG March Meeting</h3>
+<div class="paragraph">
+<p>Recent updates to the community-based operator by the Kubernetes SIG have seen the specification for seeds now supporting hostnames and separate seeds for separate data centers. Currently, the SIG is discussing whether cass-operator should have CRDs for keyspaces and roles, how to accomplish pod-specific configurations, and whether CRDs should represent Schema.</p>
+</div>
+<div class="paragraph btn btn--alt my-small">
+<p><a href="https://www.google.com">Read More</a></p>
+</div>
+</div>
+</div>
+<div class="openblock float50 full-800 flex flex-center pa-medium"">
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="_images/blog/blog-post-improving-resiliency/kub-cass-mar.png" alt="kub cass mar">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </div>
+        <footer class="grad grad--two flex-center pb-xlarge">
+    <div class="inner text-center z2 relative">
+        <h2 class="white py-small">Get started with Cassandra, fast.</h2>
+        <a href="https://cassandra.apache.org/_/quickstart.html" class="btn btn--filled ma-medium">Quickstart Guide</a>
+    </div>
+    <div class="inner flex flex-distribute-items mt-xlarge z2 relative">
+        <div class="col-2">
+            <div class="logo mb-medium"><img src="../assets/img/logo-white.svg" alt=""></div>
+            <p>Apache Cassandra powers mission-critical deployments with improved performance and unparalleled levels of scale in the cloud.</p>
+        </div>
+        <div class="col-2 flex flex-center">
+            <ul class="columns-2">
+                <li class="mb-small"><a href="https://cassandra.apache.org">Home</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/cassandra-basics.html">Cassandra Basics</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/quickstart.html">Quickstart</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/ecosystem.html">Ecosystem</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/doc/latest/">Documentation</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/community.html">Community</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/case-studies.html">Case Studies</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/resources.html">Resources</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<div class="lower-footer bg-white pa-medium">
+    <div class="flex flex-row flex-vert-center">
+        <div class="pr-medium"><img src="../assets/img//feather-small.png" alt="ASF" width="20"></div>
+        <div class="pr-medium"><a href="http://www.apache.org/" target="_blank">Foundation</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/events/current-event.html" target="_blank">Events</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/licenses/" target="_blank">License</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/foundation/thanks" target="_blank">Thanks</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/security" target="_blank">Security</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/foundation/sponsorship" target="_blank">Sponsorship</a></div>
+    </div>
+    <p class="my-medium">© <script>document.write(new Date().getFullYear())</script>2021 <a href="https://apache.org" target="_blank">The Apache Software Foundation</a> under the terms of the Apache License 2.0. Apache, the Apache feather logo, and Apache Cassandra are trademarks of The Apache Software Foundation.</p>
+</div><script src="../assets/js/site.js"></script>
+<script async src="../assets/js/vendor/highlight.js"></script>
+<script src="../assets/js/vendor/lunr.js"></script>
+<script src="../assets/js/vendor/search.js" id="search-script" data-base-path=".." data-page-path="/_/index.html"></script>
+<script async src="../assets/../search-index.js"></script>
+<script>
+jQuery(function(){
+    var windowW = $(window).width();
+
+    $(document)
+    .on('click','.mobile-nav-icon',function(){
+        $('.main-nav').fadeIn();
+    })
+    .on('click','.main-nav',function(){
+        if(windowW <= 1000){
+            $(this).fadeOut();
+        }
+    })
+    .on('click','#version-toggle',function(){
+      $(this).toggleClass('active');
+      $(this).next().fadeToggle();
+    })
+    .on('click','#mobile-docs-nav-burger', function(){
+      $(this).toggleClass('active');
+      $('.docs-nav').toggleClass('active');
+    });
+});
+</script>      </div>
+  </body>
+ <script>
+jQuery(function(){
+    var logos = $('.all-users').find('.company-logo').length;
+    var arr = [];
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5);
+    }
+    var i = 1;
+    for(i; i <= logos; i++){
+        arr.push(i);
+    }
+    shuffle(arr);
+    var e = 0;
+    for(e; e < 6; e++){
+        $('.company-logo').eq(arr[e]).addClass('show');
+    }
+});
+</script>
+</html>

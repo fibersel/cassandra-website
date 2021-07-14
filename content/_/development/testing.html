@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Apache Cassandra | Apache Cassandra Documentation</title>
+    <link rel="canonical" href="https://cassandra.apache.org/_/development/testing.html">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&amp;family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/site.css">
+    <link rel="schema.dcterms" href="https://purl.org/dc/terms/">
+    <meta name="dcterms.subject" content="_">
+    <meta name="dcterms.identifier" content="master">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+<script>
+  const script = document.createElement("script");
+  const domain = window.location.hostname;
+  script.type = "text/javascript";
+  script.src = "https://plausible.cassandra.apache.org/js/plausible.js";
+  script.setAttribute("data-domain",domain);
+  script.setAttribute("defer",'true');
+  script.setAttribute("async",'true');
+  document.getElementsByTagName("head")[0].appendChild(script);
+</script>  </head>
+  <body class="basic ">
+      <div class="container mx-auto relative">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta property="og:type" content="website" />
+	<meta property="og:url" content="https://cassandra.apache.org" />
+	<meta property="og:site_name" content="Apache Cassandra" />
+
+<header id="top-nav">
+    <div class="inner relative">
+        <div class="logo"><a href="https://cassandra.apache.org"><img src="../../assets/img/logo-white.svg" alt=""></a></div>
+        <div class="mobile-nav-icon right">
+            <img class="toggle-icon" src="../../assets/img/hamburger-nav.svg">
+        </div>
+        <ul class="main-nav nav-links right flex flex-vert-center flex-space-between">
+    <li>
+        <a class="nav-link hide-mobile">Get Started</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/cassandra-basics.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-basics.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Cassandra Basics
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/quickstart.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-rocket.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Quickstart
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/ecosystem.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-ecosystem.png" alt="cassandra basics icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Ecosystem
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="nav-link" href="https://cassandra.apache.org/doc/latest/">Documentation</a></li>
+    <li>
+        <a class="nav-link" href="https://cassandra.apache.org/_/community.html">Community</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/community.html#code-of-conduct">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-welcome.png" alt="welcome icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Welcome
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#discussion">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-discussions.png" alt="discussions icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Discussions
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#project-governance">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-governance.png" alt="Governance icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Governance
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#how-to-contribute">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-contribute.png" alt="Contribute icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Contribute
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro hide-mobile">
+                <a href="https://cassandra.apache.org/_/community.html#meet-the-community">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-community.png" alt="Meet the Community icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Meet the Community
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a class="nav-link hide-mobile">Learn</a>
+        <ul class="sub-menu bg-white">
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/case-studies.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-case-study.png" alt="Case Studies icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Case Studies
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/resources.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-resources.png" alt="Resources icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Resources
+                    </div>
+                </a>
+            </li>
+            <li class="pa-micro">
+                <a href="https://cassandra.apache.org/_/blog.html">
+                    <div class="sub-nav-icon">
+                        <img src="../../assets/img/sub-menu-blog.png" alt="Blog icon">
+                    </div>
+                    <div class="sub-nav-text teal py-small">
+                        Blog
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a class="nav-link btn btn--filled" href="https://cassandra.apache.org/_/download.html">Download Now</a></li>
+</ul>
+    </div>
+</header>
+
+        <div class="hero hero--home grad">
+            <div class="eye"></div>
+            <div id="home-content" class="text-center flex flex-center flex-column relative z2 ma-xlarge">
+                <h1></h1>
+            </div>
+        </div>
+        <div class="flex-center py-large arrow">
+            <div class="inner inner--narrow">
+                <div class="sect1">
+<h2 id="testing"><a class="anchor" href="#testing"></a>Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creating tests is one of the most important and also most difficult
+parts of developing Cassandra. There are different ways to test your
+code depending on what you&#8217;re working on.</p>
+</div>
+<div class="sect2">
+<h3 id="unit-testing"><a class="anchor" href="#unit-testing"></a>Unit Testing</h3>
+<div class="paragraph">
+<p>The simplest test to write for Cassandra code is a unit test.
+Cassandra uses JUnit as a testing framework and test cases
+can be found in the <code>test/unit</code> directory.
+Ideally, you’d be able to create a unit test for your implementation that would exclusively cover the class you created (the unit under test).
+Unfortunately, this is not always possible, because Cassandra doesn’t have a very mock friendly code base.
+Often you’ll find yourself in a situation where you have to use an embedded Cassandra instance to interact with your test.
+If you want to make use of CQL in your test, you can extend CQLTester and use
+some of the convenient helper methods, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Test
+public void testBatchAndList() throws Throwable
+{
+   createTable("CREATE TABLE %s (k int PRIMARY KEY, l list&lt;int&gt;)");
+   execute("BEGIN BATCH " +
+           "UPDATE %1$s SET l = l +[ 1 ] WHERE k = 0; " +
+           "UPDATE %1$s SET l = l + [ 2 ] WHERE k = 0; " +
+           "UPDATE %1$s SET l = l + [ 3 ] WHERE k = 0; " +
+           "APPLY BATCH");
+
+   assertRows(execute("SELECT l FROM %s WHERE k = 0"),
+              row(list(1, 2, 3)));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unit tests can be run using the command <code>ant test</code>. Both test suites and
+individual tests can be executed.</p>
+</div>
+<div class="paragraph">
+<p>Test suite:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">ant test -Dtest.name=&lt;simple_classname&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, replace <code>&lt;simple_classname&gt;</code> with <code>SimpleQueryTest</code> to test all the methods in <code>org.apache.cassandra.cql3.SimpleQueryTest</code>.</p>
+</div>
+<div class="paragraph">
+<p>Individual test:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">ant testsome -Dtest.name=&lt;FQCN&gt; -Dtest.methods=&lt;testmethod1&gt;[,testmethod2]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, replace <code>&lt;FQCN&gt;</code> with <code>org.apache.cassandra.cql3.SimpleQueryTest</code>
+and <code>&lt;testmethod1&gt;</code> with <code>testStaticCompactTables</code> to test just the one method.</p>
+</div>
+<div class="paragraph">
+<p>If you get the following error for a unit test, install the <code>ant-optional</code> package
+because you need the <code>JUnitTask</code> class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs" data-lang="none">Throws: cassandra-trunk/build.xml:1134: taskdef A class needed by class org.krummas.junit.JStackJUnitTask cannot be found:
+org/apache/tools/ant/taskdefs/optional/junit/JUnitTask  using the classloader
+AntClassLoader[/.../cassandra-trunk/lib/jstackjunit-0.0.1.jar]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tests that consume a significant amount of time during execution can be found
+in the <code>test/long</code> directory.
+They can be executed as a regular JUnit test or standalone program.
+Except for the execution time, there’s nothing
+really special about them, but <code>ant</code> will only execute these test with the
+<code>ant long-test</code> target.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dtests"><a class="anchor" href="#dtests"></a>DTests</h3>
+<div class="paragraph">
+<p>One way of doing integration or system testing at larger scale is
+using <a href="https://github.com/apache/cassandra-dtest">dtest</a> (Cassandra distributed test).
+These dtests automatically setup Cassandra clusters with certain configurations and simulate use cases you want to test.
+DTests are Python scripts that use <code>ccmlib</code> from the <a href="https://github.com/pcmanus/ccm">ccm</a> project.
+The clusters set up with dtests run like ad-hoc clusters executed with <code>ccm</code> on your local machine.</p>
+</div>
+<div class="paragraph">
+<p>Once a cluster is initialized, the <a href="http://datastax.github.io/python-driver/installation.html">Python driver</a> is used to interact with the nodes, manipulate the file system, analyze logs, or change individual nodes.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://builds.apache.org/">CI server</a> uses dtests against new patches to  prevent regression bugs.
+Committers can set up build branches and use the CI environment to run tests for your submitted patches.
+Read more on the motivation behind <a href="http://www.datastax.com/dev/blog/cassandra-testing-improvements-for-developer-convenience-and-confidence">continuous integration</a>.</p>
+</div>
+<div class="paragraph">
+<p>The best way to learn how to write dtests is probably by reading the
+introduction "http://www.datastax.com/dev/blog/how-to-write-a-dtest[How
+to Write a Dtest]".
+Looking at existing, recently updated tests in the project is another good activity.
+New tests must follow certain
+<a href="https://github.com/apache/cassandra-dtest/blob/master/CONTRIBUTING.md">style
+conventions</a> that are checked before contributions are accepted.
+In contrast to Cassandra, dtest issues and pull requests are managed on
+github, therefore you should make sure to link any created dtests in your
+Cassandra ticket and also refer to the ticket number in your dtest PR.</p>
+</div>
+<div class="paragraph">
+<p>Creating a good dtest can be tough, but it should not prevent you from
+submitting patches!
+Please ask in the corresponding JIRA ticket how to write a good dtest for the patch.
+In most cases a reviewer or committer will able to support you, and in some cases they may offer to write a dtest for you.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="performance-testing"><a class="anchor" href="#performance-testing"></a>Performance Testing</h3>
+<div class="paragraph">
+<p>Performance tests for Cassandra are a special breed of tests that are
+not part of the usual patch contribution process. In fact, many people
+contribute a lot of patches to Cassandra without ever running performance
+tests. However, they are important when working on performance
+improvements; such improvements must be measurable.</p>
+</div>
+<div class="paragraph">
+<p>Several tools exist for running performance tests. Here are a few to investigate:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cassandra-stress</code>: built-in Cassandra stress tool</p>
+</li>
+<li>
+<p><a href="https://github.com/thelastpickle/tlp-stress">tlp-stress</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nosqlbench/nosqlbench">NoSQLBench</a></p>
+</li>
+<li>
+<p><a href="https://github.com/datastax/cstar_perf">cstar_perf</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <footer class="grad grad--two flex-center pb-xlarge">
+    <div class="inner text-center z2 relative">
+        <h2 class="white py-small">Get started with Cassandra, fast.</h2>
+        <a href="https://cassandra.apache.org/_/quickstart.html" class="btn btn--filled ma-medium">Quickstart Guide</a>
+    </div>
+    <div class="inner flex flex-distribute-items mt-xlarge z2 relative">
+        <div class="col-2">
+            <div class="logo mb-medium"><img src="../../assets/img/logo-white.svg" alt=""></div>
+            <p>Apache Cassandra powers mission-critical deployments with improved performance and unparalleled levels of scale in the cloud.</p>
+        </div>
+        <div class="col-2 flex flex-center">
+            <ul class="columns-2">
+                <li class="mb-small"><a href="https://cassandra.apache.org">Home</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/cassandra-basics.html">Cassandra Basics</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/quickstart.html">Quickstart</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/ecosystem.html">Ecosystem</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/doc/latest/">Documentation</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/community.html">Community</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/case-studies.html">Case Studies</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/resources.html">Resources</a></li>
+                <li class="mb-small"><a href="https://cassandra.apache.org/_/blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<div class="lower-footer bg-white pa-medium">
+    <div class="flex flex-row flex-vert-center">
+        <div class="pr-medium"><img src="../../assets/img//feather-small.png" alt="ASF" width="20"></div>
+        <div class="pr-medium"><a href="http://www.apache.org/" target="_blank">Foundation</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/events/current-event.html" target="_blank">Events</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/licenses/" target="_blank">License</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/foundation/thanks" target="_blank">Thanks</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/security" target="_blank">Security</a></div>
+        <div class="pr-medium"><a href="https://www.apache.org/foundation/sponsorship" target="_blank">Sponsorship</a></div>
+    </div>
+    <p class="my-medium">© <script>document.write(new Date().getFullYear())</script>2021 <a href="https://apache.org" target="_blank">The Apache Software Foundation</a> under the terms of the Apache License 2.0. Apache, the Apache feather logo, and Apache Cassandra are trademarks of The Apache Software Foundation.</p>
+</div><script src="../../assets/js/site.js"></script>
+<script async src="../../assets/js/vendor/highlight.js"></script>
+<script src="../../assets/js/vendor/lunr.js"></script>
+<script src="../../assets/js/vendor/search.js" id="search-script" data-base-path="../.." data-page-path="/_/development/testing.html"></script>
+<script async src="../../assets/../search-index.js"></script>
+<script>
+jQuery(function(){
+    var windowW = $(window).width();
+
+    $(document)
+    .on('click','.mobile-nav-icon',function(){
+        $('.main-nav').fadeIn();
+    })
+    .on('click','.main-nav',function(){
+        if(windowW <= 1000){
+            $(this).fadeOut();
+        }
+    })
+    .on('click','#version-toggle',function(){
+      $(this).toggleClass('active');
+      $(this).next().fadeToggle();
+    })
+    .on('click','#mobile-docs-nav-burger', function(){
+      $(this).toggleClass('active');
+      $('.docs-nav').toggleClass('active');
+    });
+});
+</script>      </div>
+  </body>
+<script>
+jQuery(function(){
+    jQuery(document)
+    .on('click','.cassandra-cloud h3',function(){
+        var el = jQuery(this);
+        el.toggleClass('active');
+        el.next().slideToggle();
+    });
+});
+</script>
+</html>
