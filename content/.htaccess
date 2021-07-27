@@ -12,6 +12,7 @@ RewriteRule ^(.*)/$ /_/$1.html [R=301,L]
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
+    Redirect 301 /blog.html /_/blog.html
     Redirect 301 /blog/2021/04/19/cass-world-party-speakers.html /blog/Speakers-Announced-for-April-28-Cassandra-4.0-World-Party.html
     Redirect 301 /blog/2021/04/12/cass-changelog_6.html /blog/Apache-Cassandra-Changelog-6-April-2021.html
     Redirect 301 /blog/2021/03/25/world_party.html /blog/World-Party.html
