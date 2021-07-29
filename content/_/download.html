@@ -267,19 +267,19 @@
 <p>For the <code>&lt;release series&gt;</code> specify the major version number, without dot, and with an appended x.</p>
 </li>
 <li>
-<p>The latest <code>&lt;release series&gt;</code> is <code>311x</code>.</p>
+<p>The latest <code>&lt;release series&gt;</code> is <code>40x</code>.</p>
 </li>
 <li>
-<p>For older releases, the <code>&lt;release series&gt;</code> can be one of <code>30x</code>, <code>22x</code>, or <code>21x</code>.</p>
+<p>For older releases, the <code>&lt;release series&gt;</code> can be one of <code>311x</code>, <code>30x</code>, or <code>22x</code>.</p>
 </li>
 <li>
-<p>Add the Apache repository of Cassandra to <code>/etc/apt/sources.list.d/cassandra.sources.list</code>, for example for the latest 3.11</p>
+<p>Add the Apache repository of Cassandra to <code>/etc/apt/sources.list.d/cassandra.sources.list</code>, for example for the latest 4.0</p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">echo "deb https://downloads.apache.org/cassandra/debian 311x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list</code></pre>
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">echo "deb https://downloads.apache.org/cassandra/debian 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -371,16 +371,16 @@
 <p>For the <code>&lt;release series&gt;``</code> specify the major version number, without dot, and with an appended x.</p>
 </li>
 <li>
-<p>The latest <code>&lt;release series&gt;</code> is <code>311x</code>.</p>
+<p>The latest <code>&lt;release series&gt;</code> is <code>40x</code>.</p>
 </li>
 <li>
-<p>For older releases, the <code>&lt;release series&gt;</code> can be one of <code>30x</code>, <code>22x</code>, or <code>21x</code>.</p>
+<p>For older releases, the <code>&lt;release series&gt;</code> can be one of <code>311x</code>, <code>30x</code>, or <code>22x</code>.</p>
 </li>
 <li>
 <p>(Not all versions of Apache Cassandra are available, since building RPMs is a recent addition to the project.)</p>
 </li>
 <li>
-<p>Add the Apache repository of Cassandra to <code>/etc/yum.repos.d/cassandra.repo</code>, for example for the latest 3.11 version:</p>
+<p>Add the Apache repository of Cassandra to <code>/etc/yum.repos.d/cassandra.repo</code>, for example for the latest 4.0 version:</p>
 </li>
 </ul>
 </div>
@@ -388,7 +388,7 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">[cassandra]
 name=Apache Cassandra
-baseurl=https://downloads.apache.org/cassandra/redhat/311x/
+baseurl=https://downloads.apache.org/cassandra/redhat/40x/
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://downloads.apache.org/cassandra/KEYS</code></pre>
