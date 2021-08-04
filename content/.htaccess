@@ -9,6 +9,20 @@ RewriteCond %{REQUEST_URI} !^/doc/.*
 RewriteCond %{REQUEST_URI} ^(.*)/$
 RewriteRule ^(.*)/$ /_/$1.html [R=301,L]
 
+# redirects to new antora in-tree docs
+RewriteCond %{REQUEST_URI} !^/doc/latest/index.html [NC]
+RewriteCond %{REQUEST_URI} !^/doc/latest/cassandra [NC]
+RewriteRule ^/?doc/latest/(.+)$ /doc/latest/cassandra/$1 [R=301,L]
+RewriteCond %{REQUEST_URI} !^/doc/stable/index.html [NC]
+RewriteCond %{REQUEST_URI} !^/doc/stable/cassandra [NC]
+RewriteRule ^/?doc/stable/(.+)$ /doc/stable/cassandra/$1 [R=301,L]
+RewriteCond %{REQUEST_URI} !^/doc/4.0/index.html [NC]
+RewriteCond %{REQUEST_URI} !^/doc/4.0/cassandra [NC]
+RewriteRule ^/?doc/4.0/(.+)$ /doc/4.0/cassandra/$1 [R=301,L]
+RewriteCond %{REQUEST_URI} !^/doc/3.11/index.html [NC]
+RewriteCond %{REQUEST_URI} !^/doc/3.11/cassandra [NC]
+RewriteRule ^/?doc/3.11/(.+)$ /doc/3.11/cassandra/$1 [R=301,L]
+
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
