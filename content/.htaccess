@@ -9,6 +9,10 @@ RewriteCond %{REQUEST_URI} !^/doc/.*
 RewriteCond %{REQUEST_URI} ^(.*)/$
 RewriteRule ^(.*)/$ /_/$1.html [R=301,L]
 
+# development in-tree docs have been moved to cassandra-website
+RewriteCond %{REQUEST_URI} ^/doc/latest/development/(.+).html [NC]
+RewriteRule ^/?doc/latest/development/(.+).html$ /_/development/$1.html [R=301,L]
+
 # redirects to new antora in-tree docs
 RewriteCond %{REQUEST_URI} !^/doc/latest/index.html [NC]
 RewriteCond %{REQUEST_URI} !^/doc/latest/cassandra [NC]
