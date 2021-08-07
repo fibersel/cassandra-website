@@ -185,6 +185,30 @@
 <div class="content">
 <div class="openblock card-header">
 <div class="content">
+<h3 id="apache-cassandra-4-0-overview" class="discrete">Apache Cassandra 4.0 Overview</h3>
+<h4 id="august-06-2021" class="discrete">August 06, 2021</h4>
+</div>
+</div>
+<div class="openblock card-content">
+<div class="content">
+<div class="paragraph">
+<p>Take a look at the full overview of the latest and greatest features of Apache Cassandra 4.0.</p>
+</div>
+<div class="openblock card-btn card-btn--blog">
+<div class="content">
+<div class="paragraph btn btn--alt">
+<p><a href="blog/Apache-Cassandra-4.0-Overview.html" class="page">Read More</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="openblock card shadow relative test">
+<div class="content">
+<div class="openblock card-header">
+<div class="content">
 <h3 id="apache-cassandra-4-0-is-here" class="discrete">Apache Cassandra 4.0 is Here</h3>
 <h4 id="july-19-2021" class="discrete">July 19, 2021</h4>
 </div>
@@ -744,7 +768,7 @@
     </div>
     <div class="inner flex flex-distribute-items mt-xlarge z2 relative">
         <div class="col-2">
-            <div class="logo logo--footer mb-medium"><img src="../assets/img/logo-white.svg" alt=""></div>
+            <div id="footer-logo" class="logo logo--footer mb-medium"><img src="../assets/img/logo-white.svg" alt=""></div>
             <p>Apache Cassandra powers mission-critical deployments with improved performance and unparalleled levels of scale in the cloud.</p>
         </div>
         <div class="col-2 flex flex-center">
@@ -778,15 +802,9 @@
 <div id="modal" class="hidden">
   <div id="close-modal" class="cursor-pointer"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
   <div id="mod-content" class="vid-mod-content resp-container"></div>
-</div><script src="../assets/js/site.js"></script>
-<script async src="../assets/js/vendor/highlight.js"></script>
-<script src="../assets/js/vendor/lunr.js"></script>
-<script src="../assets/js/vendor/search.js" id="search-script" data-base-path=".." data-page-path="/_/blog.html"></script>
-<script async src="../assets/../search-index.js"></script>
-<script>
+</div><script>
 jQuery(function(){
     var windowW = $(window).width();
-
     $(document)
     .on('click','.mobile-nav-icon',function(){
         $('.main-nav').fadeIn();
@@ -821,7 +839,7 @@ jQuery(function(){
     $(document)
     .on('click','.card',function(){
         var link = $(this).find('a').attr('href');
-        window.open(link);
+        window.location = link ;
     });
     $( "#search-field" ).keyup(function() {
         $('.card').removeClass('hidden');

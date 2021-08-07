@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Apache Cassandra | Apache Cassandra Documentation</title>
-    <link rel="canonical" href="/_/blog/Improving-Apache-Cassandras-Front-Door-and-Backpressure.html">
+    <link rel="canonical" href="/_/blog/Apache-Cassandra-4.0-Overview.html">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&amp;family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/site.css">
     <meta name="description" content="The Apache Cassandra Community">
@@ -172,8 +172,8 @@
         <div class="hero hero--home grad">
             <div class="eye"></div>
             <div id="home-content" class="text-center flex flex-center flex-column relative z2 ma-xlarge">
-                <h1>Improving Apache Cassandra’s Front Door and Backpressure</h1>
-                <h3>September 03, 2020 | The Apache Cassandra Community</h3>
+                <h1>Apache Cassandra 4.0 Overview: Intensively Tested, Stable and Packed with Features for Scaling Operations Faster, Auditing, and Privacy</h1>
+                <h3>August 8, 2021 | The Apache Cassandra Community</h3>
             </div>
         </div>
         <div id="blog-post" class="flex-center py-large arrow">
@@ -184,190 +184,94 @@
             </div>
             <div class="post-content">
                 <div class="inner inner--narrow">
-                    <div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>As part of <a href="https://issues.apache.org/jira/browse/CASSANDRA-15013" target="_blank" rel="noopener">CASSANDRA-15013</a>, we have improved Cassandra’s ability to handle high throughput workloads, while having enough safeguards in place to protect itself from potentially going out of memory. In order to better explain the change we have made, let us understand at a high level, on how an incoming request is processed by Cassandra before the fix, followed by what we changed, and the new relevant configuration knobs available.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="how-inbound-requests-were-handled-before"><a class="anchor" href="#how-inbound-requests-were-handled-before"></a>How inbound requests were handled before</h3>
-<div class="paragraph">
-<p>Let us take the scenario of a client application sending requests to C* cluster. For the purpose of this blog, let us focus on one of the C* coordinator nodes.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image1.png" alt="improving resiliency 1">
-</div>
+                    <div class="paragraph">
+<p>With more than 1,000 bug fixes, Apache Cassandra 4.0 has hit General Availability. It is the most stable release in the project’s history and sets a new high benchmark for distributed databases, having undergone intensive testing to ensure that upgrading and deployments are easy and smooth.</p>
 </div>
 <div class="paragraph">
-<p>Below is the microscopic view of client-server interaction at the C* coordinator node. Each client connection to Cassandra node happens over a netty channel, and for efficiency purposes, each Netty eventloop thread is responsible for more than one netty channel.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image2.png" alt="improving resiliency 2">
-</div>
+<p>Apache Cassandra 4.0 effortlessly handles unstructured data, with thousands of writes per second. It is community-hardened and tested by Amazon, Apple, DataStax, Instaclustr, iland, Netflix, and others that routinely run clusters as large as 1,000 nodes and with hundreds of real-world use cases and schemas.</p>
 </div>
 <div class="paragraph">
-<p>The eventloop threads read requests coming off of netty channels and enqueue them into a bounded inbound queue in the Cassandra node.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image3.png" alt="improving resiliency 3">
-</div>
+<p>"A long time coming, Cassandra 4.0 is the most thoroughly tested Cassandra yet," said Nate McCall, Apache Cassandra committer and PMC chair. "The latest version is faster, more scalable, and bolstered with enterprise security features, ready-for-production with unprecedented scale in the Cloud."</p>
 </div>
 <div class="paragraph">
-<p>A thread pool dequeues requests from the inbound queue, processes them asynchronously and enqueues the response into an outbound queue. There exist multiple outbound queues, one for each eventloop thread to avoid races.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image4.png" alt="improving resiliency 4">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image5.png" alt="improving resiliency 5">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image6.png" alt="improving resiliency 6">
-</div>
-</div>
-<div class="paragraph">
-<p>The same eventloop threads that are responsible for enqueuing incoming requests into the inbound queue, are also responsible for dequeuing responses off from the outbound queue and shipping responses back to the client.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image7.png" alt="improving resiliency 7">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image8.png" alt="improving resiliency 8">
-</div>
-</div>
-<div class="sect3">
-<h4 id="issue-with-this-workflow"><a class="anchor" href="#issue-with-this-workflow"></a>Issue with this workflow</h4>
-<div class="paragraph">
-<p>Let us take a scenario where there is a spike in operations from the client. The eventloop threads are now enqueuing requests at a much higher rate than the rate at which the requests are being processed by the native transport thread pool. Eventually, the inbound queue reaches its limit and says it cannot store any more requests in the queue.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image9.png" alt="improving resiliency 9">
-</div>
-</div>
-<div class="paragraph">
-<p>Consequently, the eventloop threads get into a blocked state as they try to enqueue more requests into an already full inbound queue. They wait until they can successfully enqueue the request in hand, into the queue.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image10.png" alt="improving resiliency 10">
-</div>
-</div>
-<div class="paragraph">
-<p>As noted earlier, these blocked eventloop threads are also supposed to dequeue responses from the outbound queue. Given they are in blocked state, the outbound queue (which is unbounded) grows endlessly, with all the responses, eventually resulting in C* going out of memory. This is a vicious cycle because, since the eventloop threads are blocked, there is no one to ship responses back to the client; eventually client side timeout triggers, and clients may send more requests due to retries. This is an unfortunate situation to be in, since Cassandra is doing all the work of processing these requests as fast as it can, but there is no one to ship the produced responses back to the client.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image11.png" alt="improving resiliency 11">
-</div>
-</div>
-<div class="paragraph">
-<p>So far, we have built a fair understanding of how the front door of C* works with regard to handling client requests, and how blocked eventloop threads can affect Cassandra.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="what-we-changed"><a class="anchor" href="#what-we-changed"></a>What we changed</h3>
-<div class="sect3">
-<h4 id="backpressure"><a class="anchor" href="#backpressure"></a>Backpressure</h4>
-<div class="paragraph">
-<p>The essential root cause of the issue is that eventloop threads are getting blocked. Let us not block them by making the bounded inbound queue unbounded. If we are not careful here though, we could have an out of memory situation, this time because of the unbounded inbound queue. So we defined an overloaded state for the node based on the memory usage of the inbound queue.</p>
-</div>
-<div class="paragraph">
-<p>We introduced two levels of thresholds, one at the node level, and the other more granular, at client IP. The one at client IP helps to isolate rogue client IPs, while not affecting other good clients, if there is such a situation.</p>
-</div>
-<div class="paragraph">
-<p>These thresholds can be set using cassandra yaml file.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>native_transport_max_concurrent_requests_in_bytes_per_ip
-                        native_transport_max_concurrent_requests_in_bytes</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>These thresholds can be further changed at runtime (<a href="https://issues.apache.org/jira/browse/CASSANDRA-15519" target="_blank" rel="noopener">CASSANDRA-15519</a>).</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="configurable-server-response-to-the-client-as-part-of-backpressure"><a class="anchor" href="#configurable-server-response-to-the-client-as-part-of-backpressure"></a>Configurable server response to the client as part of backpressure</h4>
-<div class="paragraph">
-<p>If C* happens to be in overloaded state (as defined by the thresholds mentioned above), C* can react in one of the following ways:</p>
+<p>Testing included purpose-built new tools to cover every requirement:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Apply backpressure by setting “Autoread” to false on the netty channel in question (default behavior).</p>
+<p>Property-based / fuzz testing</p>
 </li>
 <li>
-<p>Respond back to the client with Overloaded Exception (if client sets “THROW_ON_OVERLOAD” connection startup option to “true.”
-Let us look at the client request-response workflow again, in both these cases.</p>
+<p>Replay testing</p>
+</li>
+<li>
+<p>Upgrade / diff testing</p>
+</li>
+<li>
+<p>Performance testing</p>
+</li>
+<li>
+<p>Fault injection</p>
+</li>
+<li>
+<p>Unit / dtest coverage expansion</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="throw_on_overload-false-default"><a class="anchor" href="#throw_on_overload-false-default"></a>THROW_ON_OVERLOAD = false (default)</h4>
 <div class="paragraph">
-<p>If the inbound queue is full (i.e. the thresholds are met).</p>
+<p>Those <a href="/blog/Testing-Apache-Cassandra-4.html">tools</a> were perfected and deployed to help meet quality goals and set a baseline for any future version of Cassandra. They provide needed infrastructure to ensure future releases retain the highest levels of quality and correctness.</p>
+</div>
+<div class="paragraph">
+<p>So, what can you expect from Cassandra 4.0?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Increased speed and scalability – uses Zero Copy Streaming to stream data up to five times faster during scaling operations without virtual nodes (vnodes) and up to 25% faster throughput on reads and writes — which delivers a more elastic architecture particularly in Cloud and Kubernetes deployments.</p>
+</li>
+<li>
+<p>Improved consistency – the fundamentals of the algorithm for incremental anti-entropy repair have been rewritten, which keeps data replicas in sync to optimize incremental repair for faster, more efficient operation and consistency across data replicas. A full repair no longer requires a costly anti-compaction during the preparation phase.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image12.png" alt="improving resiliency 12">
+<img src="../_images/blog/4.0-overview-1.png" alt="imrpoved consistency">
 </div>
 </div>
-<div class="paragraph">
-<p>C* sets autoread to false on the netty channel, which means it will stop reading bytes off of the netty channel.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image13.png" alt="improving resiliency 13">
-</div>
-</div>
-<div class="paragraph">
-<p>Consequently, the kernel socket inbound buffer becomes full since no bytes are being read off of it by netty eventloop.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image14.png" alt="improving resiliency 14">
-</div>
-</div>
-<div class="paragraph">
-<p>Once the Kernel Socket Inbound Buffer is full on the server side, things start getting piled up in the Kernel Socket Outbound Buffer on the client side, and once this buffer gets full, client will start experiencing backpressure.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>New configuration settings – exposed system metrics and configuration settings provide flexibility for operators to ensure they have easy access to data that optimize deployments. Virtual Tables lets you selectively expose system metrics and configuration settings through the Cassandra Query Language (CQL) rather than JMX.</p>
+</li>
+<li>
+<p>Minimized latency – garbage collector pause times are reduced to a few milliseconds with no latency degradation as heap sizes increase. With Java 11 support, version 4.0 uses the garbage collection algorithm ZGC to help teams optimize processes.</p>
+</li>
+<li>
+<p>Enhanced security and observability – audit logging tracks users’ access and activity with minimal impact on workload performance. New capture and replay enables analysis of production workloads to help ensure regulatory and security compliance with SOX, PCI, GDPR, or other requirements. This includes being able to track DML, DDL, and DCL activity with minimal performance hits. There’s also a new FQL tool to capture and replay live traffic data from production for analysis.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image15.png" alt="improving resiliency 15">
+<img src="../_images/blog/4.0-overview-2.png" alt="enahnced security and observability">
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Better compression – improved compression efficiency eases unnecessary strain on disk space and improves read performance. Compression is configured on a per-table basis and v4.0 supports Zstandard (Zstd), the data compression algorithm.</p>
+</li>
+<li>
+<p>A shift to a 12-month release cycle, with releases to be supported for a three-year term.</p>
+</li>
+</ul>
 </div>
-<div class="sect3">
-<h4 id="throw_on_overload-true"><a class="anchor" href="#throw_on_overload-true"></a>THROW_ON_OVERLOAD = true</h4>
 <div class="paragraph">
-<p>If the inbound queue is full (i.e. the thresholds are met), eventloop threads do not enqueue the request into the Inbound Queue. Instead, the eventloop thread creates an OverloadedException response message and enqueues it into the flusher queue, which will then be shipped back to the client.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/blog/blog-post-improving-resiliency/image16.png" alt="improving resiliency 16">
-</div>
+<p>Let the community know via the <a href="/community/#how-to-contribute">Apache Cassandra mailing list or Slack if you do run into any bugs</a>.</p>
 </div>
 <div class="paragraph">
-<p>This way, Cassandra is able to serve very large throughput, while protecting itself from getting into memory starvation issues. This patch has been vetted through thorough performance benchmarking. Detailed performance analysis can be found <a href="https://issues.apache.org/jira/browse/CASSANDRA-15013?focusedCommentId=16881762&amp;page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-16881762" target="_blank" rel="noopener">here</a>.</p>
-</div>
-</div>
+<p>You can download Apache Cassandra, documentation, and ways to become involved with the Apache Cassandra community by visiting <a href="/">/</a> and <a href="https://twitter.com/cassandra" target="_blank" rel="noopener">https://twitter.com/cassandra</a>.</p>
 </div>
                 </div>
             </div>
